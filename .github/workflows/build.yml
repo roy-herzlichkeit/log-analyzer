@@ -1,0 +1,69 @@
+name: Build and Package
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  release:
+    types: [created]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure CMake
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build
+        run: cmake --build build --config Release
+
+      - name: Run loganalyzer on sample log
+        run: |
+          ./build/Release/loganalyzer.exe ./sample_logs/docker.log
+
+      - name: Build tests
+        run: |
+          cd build
+          cl.exe /std:c++17 /EHsc /I../include ../tests/test_log_analyzer.cpp ../src/LogAnalyzer.cpp /Fe:test_runner.exe
+        shell: cmd
+
+      - name: Run tests
+        run: |
+          cd build
+          ./test_runner.exe
+
+      - name: Install NSIS
+        run: choco install nsis -y
+
+      - name: Create packages
+        run: |
+          cd build
+          cpack -G ZIP
+          cpack -G NSIS
+
+      - name: Upload ZIP artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: loganalyzer-portable-zip
+          path: build/loganalyzer-*.zip
+
+      - name: Upload NSIS installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: loganalyzer-installer
+          path: build/loganalyzer-*.exe
+
+      - name: Upload Release Assets
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            build/loganalyzer-*.zip
+            build/loganalyzer-*.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
