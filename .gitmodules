@@ -1,0 +1,3 @@
+[submodule "Adder/build/external/glfw"]
+	path = Adder/build/external/glfw
+	url = https://github.com/glfw/glfw.git

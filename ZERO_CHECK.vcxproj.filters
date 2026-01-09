@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="E:\Projects\Vanity\log-analyzer\CMakeFiles\c7d8473fa42f405d14d5eaef9bb69288\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{9A97210A-7017-35D2-B1E4-2BE8F4A0D20A}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

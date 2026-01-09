@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 4.0)
+project(adder_hrz)
+add_library(adder_hrz adder.cpp)
+set_target_properties(adder_hrz PROPERTIES PUBLIC_HEADER adder.h)
+install(TARGETS adder_hrz LIBRARY DESTINATION lib PUBLIC_HEADER DESTINATION include)
