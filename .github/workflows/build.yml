@@ -16,6 +16,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Setup MSVC Developer Command Prompt
+        uses: ilammy/msvc-dev-cmd@v1
+
       - name: Configure CMake
         run: cmake -B build -DCMAKE_BUILD_TYPE=Release
 
@@ -23,19 +26,13 @@ jobs:
         run: cmake --build build --config Release
 
       - name: Run loganalyzer on sample log
-        run: |
-          ./build/Release/loganalyzer.exe ./sample_logs/docker.log
+        run: ./build/Release/loganalyzer.exe ./sample_logs/docker.log
 
       - name: Build tests
-        run: |
-          cd build
-          cl.exe /std:c++17 /EHsc /I../include ../tests/test_log_analyzer.cpp ../src/LogAnalyzer.cpp /Fe:test_runner.exe
-        shell: cmd
+        run: cl.exe /std:c++17 /EHsc /I include tests/test_log_analyzer.cpp src/LogAnalyzer.cpp /Fe:build/test_runner.exe
 
       - name: Run tests
-        run: |
-          cd build
-          ./test_runner.exe
+        run: ./build/test_runner.exe
 
       - name: Install NSIS
         run: choco install nsis -y
