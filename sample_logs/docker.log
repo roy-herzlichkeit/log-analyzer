@@ -1,0 +1,14 @@
+2026-01-05T10:23:11Z INFO Server started
+2026-01-05T10:23:12Z INFO Loading configuration from /etc/app/config.yml
+2026-01-05T10:23:13Z INFO Database connection pool initialized
+2026-01-05T10:23:15Z INFO HTTP server listening on port 8080
+2026-01-05T10:23:45Z INFO Health check endpoint registered at /health
+2026-01-05T10:24:02Z ERROR Database timeout while executing query
+2026-01-05T10:24:03Z WARN Retrying database connection (attempt 1/3)
+2026-01-05T10:24:05Z INFO Database connection restored
+2026-01-05T10:24:45Z WARN Disk usage high: 85% capacity
+2026-01-05T10:25:00Z INFO Processing batch job: export_logs
+2026-01-05T10:25:30Z INFO Batch job completed: 1523 records processed
+2026-01-05T10:26:00Z INFO Scheduled maintenance window starting
+2026-01-05T10:26:15Z INFO Cache cleared successfully
+2026-01-05T10:26:30Z INFO Maintenance completed, resuming normal operations
